@@ -1,0 +1,37 @@
+@import "../../styles/variables/colors.scss";
+
+.app-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 36px;
+  gap: 10px;
+  background: $color-main;
+  border-radius: 4px;
+  color: $color-white;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: $color-main-hover;
+  }
+
+  &:focus {
+    border: 2px dashed $color-white;
+  }
+
+  &:active {
+    box-shadow: 0 0 0 3px $color-main-border;
+  }
+
+  &__single-icon {
+    padding: 13px;
+  }
+
+  &__icon-button {
+    background: none;
+    color: $color-main;
+  }
+}

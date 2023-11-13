@@ -1,0 +1,16 @@
+<app-search (searchEvent)="findCourse($event)"></app-search>
+<app-course-list
+  *ngIf="filteredList.length > 0"
+  [courseList]="filteredList"
+  [isEditable]="isAdmin"
+></app-course-list>
+<div *ngIf="filteredList.length === 0" class="empty">
+  <!-- 
+<app-course-list [courseList]="courses | async" [isEditable]="isAdmin"></app-course-list>
+<div *ngIf="courses" class="empty">-->
+
+  <app-info [title]="infoTitle" [text]="infoText">
+    <app-button [buttonText]="newCourse" (click)="addNewCourse()"></app-button>
+  </app-info>
+</div>
+<app-modal #modal title="Search" [message]="message"></app-modal>

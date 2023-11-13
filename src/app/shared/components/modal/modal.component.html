@@ -1,0 +1,19 @@
+<div class="modal-container" id="myModal" #myModal>
+  <div class="modal-content">
+    <button class="close" (click)="close()">
+      <fa-icon [icon]="faXmark"></fa-icon>
+    </button>
+    <div class="modal-wrapper">
+      <h3 class="title">{{ title }}</h3>
+      <hr class="hr" />
+      <p class="message">{{ message }}</p>
+      <div class="button-container">
+        <app-button [buttonText]="okButtonText" (click)="close()"></app-button>
+        <app-button
+          [buttonText]="cancelButtonText"
+          (click)="close()"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

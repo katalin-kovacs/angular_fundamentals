@@ -1,0 +1,29 @@
+<div class="card-container">
+  <div *ngFor="let course of courseList">
+    <app-course-card [course]="course" [isEditable]="isEditable">
+      <app-button
+        [buttonText]="showCourse"
+        (click)="handleShow(course)"
+      ></app-button>
+      <ng-container *ngIf="isEditable">
+        <div class="buttons-icon">
+          <app-button
+            [iconName]="faTrashCan"
+            (click)="handleDelete(course)"
+          ></app-button>
+          <app-button
+            [iconName]="faPen"
+            (click)="handleEdit(course)"
+          ></app-button>
+        </div>
+      </ng-container>
+    </app-course-card>
+  </div>
+</div>
+<app-modal
+  #modal
+  title="Delete"
+  message="Really want to delete course?"
+  okButtonText="Yes"
+  cancelButtonText="No"
+></app-modal>

@@ -1,0 +1,141 @@
+<div class="form-container">
+  <h3 class="title">
+    {{ isEdit ? "Edit course" : isCreate ? "Create course" : "Show course" }}
+  </h3>
+  <div class="form-content">
+    <h5>Main info</h5>
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        [ngClass]="{
+          error: title?.invalid && (title?.touched || title?.dirty)
+        }"
+      />
+      <div
+        *ngIf="
+          submitted || (title?.invalid && (title?.dirty || title?.touched))
+        "
+        class="error-message"
+      >
+        <div *ngIf="title?.errors?.['required']">Title is required.</div>
+        <div *ngIf="title?.errors?.['minlength']">
+          Title must be at least 2 characters long.
+        </div>
+      </div>
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        [ngClass]="{
+          error:
+            description?.invalid && (description?.touched || description?.dirty)
+        }"
+      ></textarea>
+      <div
+        *ngIf="
+          submitted ||
+          (description?.invalid && (description?.dirty || description?.touched))
+        "
+        class="error-message"
+      >
+        <div *ngIf="description?.errors?.['required']">
+          Description is required.
+        </div>
+        <div *ngIf="description?.errors?.['minlength']">
+          Description must be at least 2 characters long.
+        </div>
+      </div>
+      <hr class="hr" />
+      <h5>Authors</h5>
+      <label for="authorName">Author Name</label>
+      <div class="input-container">
+        <input
+          type="text"
+          id="authorName"
+          formControlName="authorName"
+          [ngClass]="{
+            error:
+              authorName?.invalid && (authorName?.dirty || authorName?.touched)
+          }"
+        />
+        <app-button
+          buttonText="create author"
+          [disabled]="!(isEdit || isCreate)"
+          (click)="onAddAuthor(authorName)"
+        ></app-button>
+      </div>
+      <div
+        *ngIf="
+          authorName?.invalid && (authorName?.dirty || authorName?.touched)
+        "
+        class="error-message"
+      >
+        <div *ngIf="authorName?.errors?.['pattern']">
+          New author should contain only latin letters and numbers.
+        </div>
+      </div>
+      <label>Authors List</label>
+      <div formArrayName="authors" class="authors">
+        <div
+          *ngFor="let author of authorsForms.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <app-button
+            type="deleteBtn"
+            [buttonText]="authorFormat(author.value.author)"
+            [iconName]="Xmark"
+            ngClass="deleteAuthorButton"
+            [id]="i"
+            (click)="deleteAuthor(i)"
+          ></app-button>
+        </div>
+      </div>
+      <hr class="hr" />
+      <h5>Duration</h5>
+      <label for="duration">Duration</label>
+      <div class="input-container">
+        <input
+          type="number"
+          formControlName="duration"
+          id="duration"
+          [ngClass]="{
+            error: duration?.invalid && (duration?.touched || duration?.dirty)
+          }"
+        />
+        <span class="duration"
+          ><b>{{ courseForm.value.duration | duration }}</b
+          >&nbsp;hours</span
+        >
+      </div>
+      <div
+        *ngIf="
+          submitted ||
+          (duration?.invalid && (duration?.dirty || duration?.touched))
+        "
+        class="error-message"
+      >
+        <div *ngIf="duration?.errors?.['required']">Duration is required.</div>
+        <div *ngIf="duration?.errors?.['min']">
+          Duration cannot be zero or negative.
+        </div>
+      </div>
+      <div class="button-container">
+        <app-button buttonText="cancel" (click)="handleCancel()"></app-button>
+        <app-button
+          [buttonText]="
+            isEdit
+              ? 'Update course'
+              : isCreate
+              ? 'Create course'
+              : 'Show course'
+          "
+          type="submit"
+          [disabled]="!isEdit && !isCreate"
+        ></app-button>
+      </div>
+    </form>
+  </div>
+</div>

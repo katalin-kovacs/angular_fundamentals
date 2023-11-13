@@ -1,0 +1,95 @@
+<h2 class="text-align-center">Registration</h2>
+<div class="app-plate">
+  <form [formGroup]="registrationForm">
+    <div class="registration-form">
+      <div>
+        <div class="form__control">
+          <label for="name">Name</label>
+          <!--Use the name `name` for the form control.-->
+          <input
+            type="text"
+            id="name"
+            placeholder="Input text"
+            formControlName="name"
+          />
+          <span
+            id="nameErrorMessage"
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('name')?.hasError('required') &&
+              registrationForm.get('name')?.touched
+            "
+            >Name is required.</span
+          >
+          <span
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('name')?.hasError('minlength') &&
+              registrationForm.get('name')?.touched
+            "
+          >
+            Name should have at least 6 characters.
+          </span>
+        </div>
+        <div class="form__control">
+          <!--Use the name `email` for the form control.-->
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Input text"
+            formControlName="email"
+          />
+          <span
+            id="emailErrorMessage"
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('email')?.hasError('required') &&
+              registrationForm.get('email')?.touched
+            "
+            >Email is required.</span
+          >
+          <span
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('email')?.hasError('invalidEmail') &&
+              registrationForm.get('email')?.touched
+            "
+          >
+            Invalid email format.
+          </span>
+        </div>
+        <div class="form__control">
+          <!--Use the name `password` for the form control.-->
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Input text"
+            formControlName="password"
+          />
+          <span
+            id="passwordErrorMessage"
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('password')?.hasError('required') &&
+              registrationForm.get('password')?.touched
+            "
+            >Password is required.</span
+          >
+        </div>
+      </div>
+      <div class="form__action">
+        <app-button
+          [buttonText]="registerBtnText"
+          (click)="onSubmit()"
+        ></app-button>
+      </div>
+      <div class="form__text">
+        If you have an account you may go to
+        <!-- <strong><a routerLink="/login">Login</a></strong> -->
+        <a href="/login"><strong>Login</strong></a>
+      </div>
+    </div>
+  </form>
+</div>

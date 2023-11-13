@@ -1,0 +1,13 @@
+<app-header>
+  <div *ngIf="isAuth$ | async" class="logged">
+    <p class="user">{{ user$ | async }}</p>
+    <app-button label="Logout" (click)="logOut()"></app-button>
+  </div>
+</app-header>
+
+<div class="app-root">
+  <router-outlet></router-outlet>
+
+  <!-- Modal component -->
+  <!-- <app-modal [message]="'Message'" [title]="'Title'" [okButtonText]="'Ok'" [cancelButtonText]="'Cancel'"></app-modal> -->
+</div>

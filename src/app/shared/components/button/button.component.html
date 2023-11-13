@@ -1,0 +1,9 @@
+<button
+  class="app-button"
+  [style.width.%]="width"
+  [type]="type"
+  [disabled]="disabled"
+>
+  <fa-icon *ngIf="iconName" [icon]="['fas', iconName]"></fa-icon>
+  <span *ngIf="buttonText">{{ buttonText }}</span>
+</button>
